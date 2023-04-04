@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 import { auth } from "../api/firebase";
 import Erro from "./features/error";
 import { setUser } from "../slicers/auth_slice";
-import Home from "./home";
+
 import { Link, useNavigate } from "react-router-dom";
 
 const MainLogin = styled.div`

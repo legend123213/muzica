@@ -4,7 +4,7 @@ import Home from "./components/home";
 import Edit from "./components/edit";
 import SignUp from "./components/registration_form";
 import Login_from from "./components/login_from";
-import Create_album from "./components/create_album";
+
 import Create_music from "./components/create_music";
 import music_store from "./stores/store";
 import { Provider } from "react-redux";
@@ -25,7 +25,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login_from />} />
       <Route path="/signup" element={<SignUp />} />
       <Route index element={<Home />} />
-      <Route path="/album" element={<Create_album />} />
+
       <Route path="/edit" element={<Edit />} />
       <Route path="/signout" element={<Signout />} />
       <Route path="/mymusic" element={<Mymusic />} />

@@ -1,34 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  add_music_request,
-  delete_music_request,
-  update_music_request,
-  get_music_request,
-} from "../slicers/music_slice";
+import { get_music_request } from "../slicers/music_slice";
 import Card from "./features/card";
 import styled from "@emotion/styled";
-import Navbar from "./features/navbar";
 
-import { Link, useLoaderData } from "react-router-dom";
-
-// const Btnadd = styled.a`
-//   width: 200px;
-//   height: 60px;
-//   cursor: pointer;
-//   background-color: white;
-//   border-radius: 30px;
-//   border: 4px solid;
-//   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0, 0.4);
-//   color: rgb(135, 130, 122);
-//   display: inline-flex;
-//   align-items: center;
-//   &:hover {
-//     box-shadow: rgba(120, 120, 120, 0.4) 0px 3px 8px;
-//     background-color: greenyellow;
-//     color: black;
-//   }
-// `;
+import { Link } from "react-router-dom";
 
 const Img = styled.img`
   width: 80px;

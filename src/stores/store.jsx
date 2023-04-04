@@ -1,9 +1,5 @@
 import createSagaMiddleware from "@redux-saga/core";
-import {
-  combineReducers,
-  configureStore,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import music_sl from "../slicers/music_slice";
 import auth_slice from "../slicers/auth_slice";
 import rootSaga from "../sagas/sagas";

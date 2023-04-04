@@ -3,38 +3,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { add_music_request, ToBeEdited } from "../slicers/music_slice";
-import Navbar from "./features/navbar";
+
 import styled from "@emotion/styled";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Num = styled.input`
-  position: relative;
-  height: 40px;
-  width: 85%;
-  padding: 8px 15px;
-  border: 3px solid greenyellow;
-
-  outline: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  margin-top: 8px;
-  background-color: #6b728e;
-  color: white;
-  transition: transform 0.3s ease-in-out;
-  &:focus {
-    border: 3px solid greenyellow;
-    transform: scale(1.01);
-  }
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  &[type="number"] {
-    -moz-appearance: textfield;
-  }
-`;
 const AllBody = styled.div`
   min-height: 100vh;
   display: flex;
