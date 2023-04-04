@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import Create_music from "./create_music";
 function Edit() {
