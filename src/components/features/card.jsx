@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import {
   delete_music_request,
   update_music_request,
+  get_music_request,
 } from "../../slicers/music_slice";
 import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const CardTitle = styled.h2`
   font-size: 20px;
@@ -99,16 +101,20 @@ const Btn = styled.div`
 `;
 
 function Card(Props) {
+  const nav = useNavigate();
   const dispatch = useDispatch();
   const [getid, Setid] = useState("");
-  console.log(Props.musics);
+
   const handleupdate = (id) => {
     console.log(id);
     dispatch(update_music_request(id));
+    nav("/edit", { state: { id: id } });
   };
   const handledelete = (id) => {
     console.log(id);
     dispatch(delete_music_request(getid));
+    dispatch(get_music_request());
+    nav("/");
   };
   useEffect(() => {
     Setid(Props.musics.id);
@@ -126,6 +132,7 @@ function Card(Props) {
 
         {Props.mymusic ? (
           <div>
+            {/* <Link to="/edit"> */}
             <BtnEdit
               onClick={() => {
                 handleupdate(Props.musics.id);
@@ -133,6 +140,8 @@ function Card(Props) {
             >
               EDIT
             </BtnEdit>
+            {/* </Link> */}
+
             <BtnDel
               onClick={() => {
                 handledelete(Props.musics.id);

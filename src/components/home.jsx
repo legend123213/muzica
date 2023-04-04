@@ -10,7 +10,7 @@ import Card from "./features/card";
 import styled from "@emotion/styled";
 import Navbar from "./features/navbar";
 
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 // const Btnadd = styled.a`
 //   width: 200px;
@@ -44,50 +44,57 @@ const Img = styled.img`
     box-shadow: rgba(0, 0, 0, 0.4);
   }
 `;
+const Cection = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+const Homee = styled.div`
+  margin: 0 0 0 0px;
+  height: 95vh;
+`;
+const Welcome = styled.h1`
+  margin-top: 0px;
+  margin-left: 35%;
+`;
+const Loading = styled.h1`
+  text-align: center;
+`;
+const Paragraph = styled.p`
+  text-align: center;
+`;
 
 function Home() {
-  // const [musics, setMusic] = useState([]);
-  const Cection = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  `;
-
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   const music = useSelector((state) => state.music.musicList);
-  const isLoading = useSelector((state) => state.music.statuss);
+  let isLoading = useSelector((state) => state.music.statuss);
 
   useEffect(() => {
     dispatch(get_music_request());
-  }, []);
-  useEffect(() => {
-    console.log({ music, isLoading });
-  }, [music]);
-  const Homee = styled.div`
-    margin: 0 0 0 0px;
-    height: 95vh;
-  `;
-  const Welcome = styled.h1`
-    margin-top: 0px;
-  `;
-  const Loading = styled.h1`
-    text-align: center;
-  `;
-  const Paragraph = styled.p`
-    text-align: center;
-  `;
+
+    isLoading = false;
+  }, [isLoading]);
+
   return (
     <React.Fragment>
-      <Navbar />
       <Homee>
         <div>
-          <Welcome>Home</Welcome>
-          <Paragraph>Welcome</Paragraph>
+          <Welcome>All Collection Of Musics</Welcome>
+          <Paragraph>
+            manage your music collection with just a few clicks. With our
+            user-friendly interface, you can create, read, update, and delete
+            music records with ease. Whether you're a music enthusiast or a
+            professional in the music industry, our system is designed to meet
+            your needs. Say goodbye to the hassle of manually managing your
+            music collection and hello to a more efficient and organized way of
+            managing your music records.
+          </Paragraph>
           {isLoading ? (
             <Cection>
               {music.map((m) => {
                 if (m) {
-                  return <Card key={m.id} musics={m} mymusic={true} />;
+                  return <Card key={m.id} musics={m} mymusic={false} />;
                 }
               })}
             </Cection>
@@ -95,9 +102,13 @@ function Home() {
             <Loading>Loading..</Loading>
           )}
         </div>
-        <Link to="/create">
-          <Img src="img/add-square-svgrepo-com.svg" alt="none" />
-        </Link>
+        {user ? (
+          <Link to="/mymusic/create">
+            <Img src="img/add-square-svgrepo-com.svg" alt="none" />
+          </Link>
+        ) : (
+          <span></span>
+        )}
       </Homee>
     </React.Fragment>
   );

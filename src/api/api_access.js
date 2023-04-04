@@ -7,6 +7,8 @@ import {
   getDocs,
   addDoc,
   deleteDoc,
+  updateDoc,
+  getDoc,
 } from "firebase/firestore";
 
 // const ROOTAPI = axios.create({
@@ -41,32 +43,42 @@ async function addSong(data) {
   const newSong = await addDoc(musicscollection, data);
   return newSong;
 }
-const myAsyncFunction = async (id, data) => {
-  const draft = createDraft(data);
-  // modify the draft object here
-  draft.musics.push(data);
-  return produce(draft);
-};
+// const myAsyncFunction = async (id, data) => {
+//   const draft = createDraft(data);
+//   // modify the draft object here
+//   draft.musics.push(data);
+//   return produce(draft);
+// };
 async function get_song() {
-  // const { data: postt } = await ROOTAPI.get(`musics`);
-
-  // return postt;
-
   const data = await getDocs(musicscollection);
   const arrOfData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
   return arrOfData;
 }
-async function update_song(id) {
-  const UpdateMusic = doc(db, "allmusic", id);
-  console.log(UpdateMusic);
+async function get_update_song(id) {
+  const toBeEditedData = (await getDoc(toGetIndividualRef(id))).data();
+  console.log(toBeEditedData);
+  toBeEditedData.id = id;
+  return toBeEditedData;
+}
+function toGetIndividualRef(id) {
+  const Music = doc(db, "allmusic", id);
+  return Music;
+}
+async function updateFinale(ref, data) {
+  await updateDoc(ref, data);
 }
 async function delete_song(id) {
-  // const { data: Delete } = await ROOTAPI.delete(`individual_music/${id}`);
-  // return Delete;
-
   const deletedMusic = doc(db, "allmusic", id);
   console.log(deletedMusic);
   return await deleteDoc(deletedMusic);
 }
 
-export { update_song, get_song, get_ind_song, delete_song, addSong };
+export {
+  get_update_song,
+  get_song,
+  get_ind_song,
+  delete_song,
+  addSong,
+  toGetIndividualRef,
+  updateFinale,
+};

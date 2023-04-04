@@ -3,27 +3,44 @@ import styled from "@emotion/styled";
 import Home from "../home";
 import My_music from "../my_music";
 import { Link, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <React.Fragment>
       <StyledNav>
         <StyledList>
           <StyledItem>
             <Navspan>
-              <Link to="/home">Home</Link>
+              <Link to="/">ADDISMuzica</Link>
             </Navspan>
           </StyledItem>
+
           <StyledItem>
-            <Link to="/album">Album</Link>
+            {user ? (
+              <Link to="/mymusic">My Music</Link>
+            ) : (
+              <Link to="/login">Music</Link>
+            )}
           </StyledItem>
-          <StyledItem>
-            <Link to="/create">Music</Link>
-          </StyledItem>
-          <StyledItem>
-            <Link to="/login">Login</Link>
-          </StyledItem>
+          {user ? (
+            <StyledItem>
+              <Link to="/signout">Sign out</Link>
+            </StyledItem>
+          ) : (
+            <>
+              <StyledItem>
+                <Link to="/login">Login</Link>
+              </StyledItem>
+              <StyledItem>
+                <Link to="/signup">Sign in</Link>
+              </StyledItem>
+            </>
+          )}
         </StyledList>
       </StyledNav>
+      <Outlet />
     </React.Fragment>
   );
 };

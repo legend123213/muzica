@@ -1,21 +1,25 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const apike = import.meta.env.VITE_FIREBASE_API_KEY;
+const authf = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
+const pro = import.meta.env.VITE_FIREBASE_PROJECT_ID;
+const stro = import.meta.env.VITE_FIREBASE_STORAGE_BUCKET;
+const mess = import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID;
+const appid = import.meta.env.VITE_FIREBASE_APP_ID;
+const mid = import.meta.env.VITE_FIREBASE_MEASUREMENT_ID;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAgfdDhDjah4Tl5rR11zM56PktfrdA-wvo",
-  authDomain: "addismusic-7c972.firebaseapp.com",
-  projectId: "addismusic-7c972",
-  storageBucket: "addismusic-7c972.appspot.com",
-  messagingSenderId: "21148330714",
-  appId: "1:21148330714:web:5e8a0589e42ac3b23b53e3",
-  measurementId: "G-S7BX1E4RLE",
+  apiKey: apike,
+  authDomain: authf,
+  projectId: pro,
+  storageBucket: stro,
+  messagingSenderId: mess,
+  appId: appid,
+  measurementId: mid,
 };
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const auth = getAuth(app);

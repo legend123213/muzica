@@ -5,7 +5,14 @@ const initialState = {
   musicList: [],
   myMusic: [],
   statuss: false,
-  tobeEdited: {},
+  tobeEdited: {
+    album: "",
+    genre: "",
+    id: "",
+    length: "",
+    name: " ",
+    title: "",
+  },
   id: "",
 };
 
@@ -27,6 +34,14 @@ const music_sl = createSlice({
     add_music_request(state, action) {
       state.myMusic.push(action.payload);
     },
+    ToBeEdited(state, action) {
+      state.tobeEdited.name = "";
+      state.tobeEdited.id = "";
+      state.tobeEdited.album = "";
+      state.tobeEdited.title = "";
+      state.tobeEdited.length = "";
+      state.tobeEdited.genre = "";
+    },
     deleteMusic(state, action) {
       state.musicList = state.musicList.filter((e) => {
         e.id !== action.payload;
@@ -35,13 +50,24 @@ const music_sl = createSlice({
     delete_music_request(action) {},
     update_music_request(state, action) {
       console.log(action.payload);
-      state.tobeEdited = action.payload.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      console.log(
-        action.payload.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
+      // state.tobeEdited = action.payload.docs.map((doc) => ({
+      //   ...doc.data(),
+      //   id: doc.id,
+      // }));
+      // const arr = action.payload.docs.map((doc) => ({
+      //   ...doc.data(),
+      //   id: doc.id,
+      // }));
+      // console.log(arr);
+    },
+    updateMusicSetState(state, action) {
+      console.log(action.payload);
+      state.tobeEdited.name = action.payload.name;
+      state.tobeEdited.id = action.payload.id;
+      state.tobeEdited.album = action.payload.album;
+      state.tobeEdited.title = action.payload.title;
+      state.tobeEdited.length = action.payload.length;
+      state.tobeEdited.genre = action.payload.genre;
     },
     get_Status(state) {
       return state.Status;
@@ -58,6 +84,8 @@ export const {
   set_music,
   set_Status,
   get_Status,
+  updateMusicSetState,
   set_music_requect,
+  ToBeEdited,
 } = music_sl.actions;
 export default music_sl.reducer;

@@ -1,10 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { add_music_request } from "../slicers/music_slice";
+import { add_music_request, ToBeEdited } from "../slicers/music_slice";
 import Navbar from "./features/navbar";
 import styled from "@emotion/styled";
+import { redirect, useNavigate } from "react-router-dom";
 
 const Num = styled.input`
   position: relative;
@@ -115,50 +116,69 @@ const Btn = styled.button`
   }
 `;
 function Create_music(Props) {
-  const loc = useLocation();
-  const [status, setStatus] = useState("false");
+  const nav = useNavigate();
+  const { edit } = Props;
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.auth.user);
+  const btn1 = useState(edit ? "EDIT" : "ADD");
   const [newMusic, setnewMusic] = useState({
-    name: Props.editedMusic ? Props.editedMusic.name : "",
-    title: Props.editedMusic ? Props.editedMusic.title : "",
-    length: Props.editedMusic ? Props.editedMusic.length : "",
-    album: Props.editedMusic ? Props.editedMusic.album : "",
-    genre: Props.editedMusic ? Props.editedMusic.genre : "",
+    name: "",
+    title: "",
+    length: "",
+    album: "",
+    genre: "",
+    id: "",
+    userid: user,
+    btnn: "ADD",
   });
+  useEffect(() => {
+    setnewMusic({
+      name: edit ? edit.name : "",
+      title: edit ? edit.title : "",
+      length: edit ? edit.length : "",
+      album: edit ? edit.album : "",
+      genre: edit ? edit.genre : "",
+      id: edit ? edit.id : "",
+      user_id: user.uid,
+      btnn: edit ? edit.btn : "ADD",
+    });
+  }, [edit]);
   const [showSuccesfull, setSuccfull] = useState(false);
   const add_music = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setnewMusic({ ...newMusic, [name]: value });
+    const nw = { ...newMusic, [name]: value };
+    console.log(newMusic);
+    if (newMusic.btnn === "ADD") {
+      delete nw.id;
+
+      setnewMusic({ ...nw });
+    } else {
+      delete nw.btnn;
+      setnewMusic({ ...nw, ["id"]: edit ? edit.id : "" });
+    }
   };
-  const { id, name, title, length, album, genre } = newMusic;
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      id !== "" ||
-      name !== "" ||
-      title !== "" ||
-      length != 0 ||
-      album !== "" ||
-      genre !== ""
-    ) {
-      dispatch(add_music_request(newMusic));
+    if (newMusic.btnn === "ADD") {
+      const remove = { ...newMusic };
+      delete remove.btnn;
+      setnewMusic();
+      dispatch(add_music_request(remove));
       setSuccfull(true);
-      setnewMusic({
-        name: "",
-        title: "",
-        length: "",
-        album: "",
-        genre: "",
-      });
+      console.log("done");
+      nav("/");
     } else {
+      dispatch(ToBeEdited(newMusic));
+      setSuccfull(true);
+
+      nav("/");
     }
   };
 
   return (
     <React.Fragment>
-      <Navbar />
       <TopHeading>
         <h1>Submit Your Music</h1>
         <p>Enter your details for evolution </p>
@@ -217,7 +237,7 @@ function Create_music(Props) {
               onChange={add_music}
             />
             <Btndiv>
-              <Btn>ADD</Btn>
+              <Btn>{btn1}</Btn>
             </Btndiv>
           </Form>
           {showSuccesfull ? <h1>succfully submited</h1> : <div></div>}
