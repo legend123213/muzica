@@ -122,7 +122,7 @@ function Card(Props) {
   return (
     <Card_in>
       <Image id={Props.id}>
-        <Img src="../img/sound.png" />
+        <Img src="../public/sound.png" />
       </Image>
 
       <Btn>
