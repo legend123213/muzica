@@ -95,7 +95,7 @@ function Mymusic() {
           )}
         </div>
         <Link to="/mymusic/create">
-          <Img src="../public/add-square-svgrepo-com.svg" alt="none" />
+          <Img src="../src/public/add-square-svgrepo-com.svg" alt="none" />
         </Link>
       </Homee>
     </React.Fragment>
