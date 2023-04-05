@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../slicers/auth_slice";
@@ -72,16 +73,11 @@ const BtnLog = styled.button`
     background-color: #187098;
   }
 `;
-const SignIn = styled.p``;
-const Signup = styled.div`
-  height: 15px;
-  padding-bottom: 10px;
-  padding-left: 200px;
-`;
+
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPwd, setConfirmPwd] = useState("");
+  const nav = useNavigate();
   const dispatch = useDispatch();
   const userind = useSelector((state) => state.auth.user)
     ? useSelector((state) => state.auth.user)
@@ -97,9 +93,10 @@ const SignUp = () => {
       );
 
       dispatch(setUser(user));
-      console.log(user);
-      console.log(userind.uid);
+      console.log(user.uid);
+
       console.log("Signed up!");
+      nav("/");
     } catch (error) {
       console.error(error.message);
     }

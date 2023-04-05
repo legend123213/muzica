@@ -122,7 +122,7 @@ function Card(Props) {
   return (
     <Card_in>
       <Image id={Props.id}>
-        <Img src="img/sound.png" />
+        <Img src="../img/sound.png" />
       </Image>
 
       <Btn>
@@ -132,7 +132,6 @@ function Card(Props) {
 
         {Props.mymusic ? (
           <div>
-            {/* <Link to="/edit"> */}
             <BtnEdit
               onClick={() => {
                 handleupdate(Props.musics.id);

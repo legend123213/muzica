@@ -38,6 +38,10 @@ const Loading = styled.h1`
 const Paragraph = styled.p`
   text-align: center;
 `;
+const Welc = styled.h1`
+  margin-top: 0px;
+  margin-left: 35%;
+`;
 
 function Mymusic() {
   const dispatch = useDispatch();
@@ -61,14 +65,23 @@ function Mymusic() {
     <React.Fragment>
       <Homee>
         <div>
-          <Welcome>Play With Your Musics Data </Welcome>
-          <Paragraph>
-            your users to easily manage their music collections with features
-            such as search and filter options, sorting capabilities, and the
-            ability to add custom fields. Contact us today to learn more about
-            how our system can benefit your business and improve the overall
-            user experience.
-          </Paragraph>
+          {mymusics === [] ? (
+            <div>
+              <Welcome>Play With Your Musics Data </Welcome>
+              <Paragraph>
+                your users to easily manage their music collections with
+                features such as search and filter options, sorting
+                capabilities, and the ability to add custom fields. Contact us
+                today to learn more about how our system can benefit your
+                business and improve the overall user experience.
+              </Paragraph>
+            </div>
+          ) : (
+            <div>
+              <Welc>You have No Musics Data </Welc>
+            </div>
+          )}
+
           {isLoading ? (
             <Cection>
               {mymusics.map((m) => {

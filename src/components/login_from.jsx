@@ -101,7 +101,6 @@ function Login_from() {
       nav("/");
     } catch (error) {
       console.error(error.message);
-      return <Erro />;
     }
   };
 
