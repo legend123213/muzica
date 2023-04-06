@@ -65,7 +65,7 @@ function Mymusic() {
     <React.Fragment>
       <Homee>
         <div>
-          {mymusics === [] ? (
+          {mymusics == [] ? (
             <div>
               <Welcome>Play With Your Musics Data </Welcome>
               <Paragraph>
@@ -95,7 +95,7 @@ function Mymusic() {
           )}
         </div>
         <Link to="/mymusic/create">
-          <Img src="../src/public/add-square-svgrepo-com.svg" alt="none" />
+          <Img src="../public/add-square-svgrepo-com.svg" alt="none" />
         </Link>
       </Homee>
     </React.Fragment>
