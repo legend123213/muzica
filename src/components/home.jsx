@@ -80,10 +80,7 @@ function Home() {
         </div>
         {user ? (
           <Link to="/mymusic/create">
-            <Img
-              src="https://github.com/legend123213/muzica/blob/547558b4e81307b94f1838e4739a6102b47d05cc/src/public/add-square-svgrepo-com.svg"
-              alt="none"
-            />
+            <Img src="../public/add-square-svgrepo-com.svg" alt="none" />
           </Link>
         ) : (
           <span></span>
