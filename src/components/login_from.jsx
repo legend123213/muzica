@@ -89,6 +89,7 @@ function Login_from() {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const userind = useSelector((state) => state.auth.user);
+  const [erro, seterro] = useState(true);
   useEffect(() => {}, [auth]);
 
   const handleLogin = async (e) => {
@@ -101,6 +102,7 @@ function Login_from() {
       nav("/");
     } catch (error) {
       console.error(error.message);
+      seterro(false);
     }
   };
 
@@ -123,9 +125,8 @@ function Login_from() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <BtnDiv>
-              {/* <Link to="/home"> */}
+              {!erro ? <p>incorrect log in</p> : <p></p>}
               <BtnLog type="submit">Log In</BtnLog>
-              {/* </Link> */}
             </BtnDiv>
           </form>
 
