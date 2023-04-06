@@ -66,7 +66,7 @@ function Mymusic() {
     <React.Fragment>
       <Homee>
         <div>
-          {mymusics.name ? (
+          {mymusics[0] ? (
             <div>
               <Welcome>Play With Your Musics Data </Welcome>
               <Paragraph>
