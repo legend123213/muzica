@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { get_music_request } from "../slicers/music_slice";
 import Card from "./features/card";
 import styled from "@emotion/styled";
+import addIcon from "../assets/imgs/add-square-svgrepo-com.svg";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -95,7 +96,7 @@ function Mymusic() {
           )}
         </div>
         <Link to="/mymusic/create">
-          <Img src="../public/add-square-svgrepo-com.svg" alt="none" />
+          <Img src={addIcon} alt="none" />
         </Link>
       </Homee>
     </React.Fragment>

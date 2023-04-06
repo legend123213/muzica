@@ -7,6 +7,7 @@ import {
 import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import soundIcon from "../../assets/imgs/sound.png";
 
 const CardTitle = styled.h2`
   font-size: 20px;
@@ -122,7 +123,7 @@ function Card(Props) {
   return (
     <Card_in>
       <Image id={Props.id}>
-        <Img src="../public/sound.png" />
+        <Img src={soundIcon} />
       </Image>
 
       <Btn>
